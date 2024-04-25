@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
+import 'package:uno/uno.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,35 +64,126 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() async {
+    var url =
+        'https://prd.drops.online/s/Drops/dw/shop/v23_1/product_search?expand=prices%2Cavailability%2Cimages&count=10&start=0&refine_1=cgid%3DB10076&refine_2=price%3D%280.01..1000000%29&locale=en-KW&locationId=kwt_009';
 
-
-    String token = 'eyJfdiI6IjEiLCJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdiI6IjEiLCJleHAiOjE3MTM4ODkzMzEsImlhdCI6MTcxMzg4NzUzMSwiaXNzIjoiNGMyMDBiYmMtMWMwOS00N2IxLWE0YzMtOTIwNGU3ODBkMThlIiwic3ViIjoie1wiX3ZcIjpcIjFcIixcImN1c3RvbWVyX2luZm9cIjp7XCJjdXN0b21lcl9pZFwiOlwiYWIxbDV2NEdkcnpwSnR2S2tBTHVXa3g4U3dcIixcImd1ZXN0XCI6ZmFsc2UsXCJ2aXNpdF9pZFwiOlwiMzJjNjcwNDA5YjI0ODEzNTIwZjgwMzRlOThcIn19In0.dl8XgldAVo8SGRDrrSAdnbD_tnRnfYwIrohjhsPW78JgTif2kukQqnB74RgKHRx6U5CTBee8ktTVwqnmtguRT-gjfs-h44AW2eEmXqAVgYtvVekXJt7X79OAm0Vyk8aRmHS_1_bcCuJj7aojzqWYyfv3mnr3FDdByuzPbI9UoQLSVv0NPiEhkoCIDaYdBd8FJhP0qgkSXv6pwyjt1ehOrLlxhpGEVEes8wrHOVkYYe16Y2NpG_mOX_gOmYm_m7hJzKuY4zU90SGc-GYkbBKfRPK3GthTr0LNXVsknydirpsZDI1hlBjrCxNz689-ogulRBuHadwxJjjEgWc73vx3IWSj79ACLkvQal4Ys7gdQro-IHsVM_uFjZXwV_oIE_Bn3AKxCA1ThkkSq_6OsXroLf7dIstCSj8bbe-POGM6bXMnqLlf4ursALfMGESWf5PH6U1x8gOR6CCW1g3v4mY6CMtjvBufNJlwbvR24ato3385WXgX03RFq-_06WhntH58lICviSCLTBrkdEwFuKSTrYQ-HPiqXDSGK8DfV5NKr6CQBohkThopuFMkRecUXMw0nue1zqE76m7odtF098ysiw';
-
+    String token =
+        'eyJfdiI6IjEiLCJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdiI6IjEiLCJleHAiOjE3MTQwNDkwODAsImlhdCI6MTcxNDA0NzI4MCwiaXNzIjoiNGMyMDBiYmMtMWMwOS00N2IxLWE0YzMtOTIwNGU3ODBkMThlIiwic3ViIjoie1wiX3ZcIjpcIjFcIixcImN1c3RvbWVyX2luZm9cIjp7XCJjdXN0b21lcl9pZFwiOlwiYWRhR2lEZzVvMk5QeW1ieWh6b2x0cmZHNWJcIixcImd1ZXN0XCI6dHJ1ZSxcInZpc2l0X2lkXCI6XCI2NmRiYzE5YmNjZmI2YzVmODE0YTEwYzc2YlwifX0ifQ.dl8XgldAVo8SGRDrrSAdnbD_tnRnfYwIrohjhsPW78JgTif2kukQqnB74RgKHRx6U5CTBee8ktTVwqnmtguRTz_xdBI5eTinUFQtcYprNPC4KO_muBg3YavmhEeFEk3p-Xyq8IGphYxb_FDeYuUxO_v3mnr3FDdByuzPbI9UoQLSVv0NPiEhkoCIDaYdBd8FJhP0qgkSXv6pwyjt1ehOrLlxhpGEVEes8wrHOVkYYe16Y2NpG_mOX_gOmYm_m7hJzKuY4zU90SGc-GYkbBKfRPK3GthTr0LNXVsknydirpsZDI1hlBjrCxNz689-ogulIKkCi2FNd175N7mIZCS3LqBvuMRr8Beo8yI39u3T8UXh3d7fcyejJwRvtQaHBptg6h0oBMECPKh_kp90uxy_dk_2yEjnvWV1qcPTol5xK-_9dvZR-E9Cf7p-CLmK7kpknoCAQmP-vsGJudyJNTQlxXyRYyUL9h-Az9p5Cdr0B5jw9hZshuzLXr50o2rSyeNxAgugEEU_SAiJWF9aVHj26HOLfW5IOh15axSjhPPlk75Ivh5rPMOaPA63cn402Ktp';
     IOClient client = IOClient();
-    var stopwatch = Stopwatch()..start();
-    final http.Response resp = await client.get(
-      Uri.parse('https://prd.drops.online/s/Drops/dw/shop/v23_1/product_search?expand=prices%2Cavailability%2Cimages&count=10&start=0&refine_1=cgid%3DB10076&refine_2=price%3D%280.01..1000000%29&locale=en-KW&locationId=kwt_009'),
-      headers: {"Authorization": token},
-    );
-    stopwatch.stop();
+    var httpClient = HttpClient();
+    var htt = http.Client();
+    final dio = Dio();
+    final uno = Uno();
+    var stopwatch = Stopwatch();
 
-    print('Request 1 took ${stopwatch.elapsedMilliseconds}ms');
+    List<Map<String, dynamic>> methods = [
+      {
+        'name': 'Http.....Client',
+        'method': () async {
+          var response = await htt
+              .get(Uri.parse(url), headers: {"Authorization": "Bearer $token"});
+          print('Status code: ${response.statusCode}');
+        }
+      },
+      {
+        'name': 'IOClient',
+        'method': () async {
+          var response = await client
+              .get(Uri.parse(url), headers: {"Authorization": "Bearer $token"});
+          print('Status code: ${response.statusCode}');
+        }
+      },
+      {
+        'name': 'HttpClient',
+        'method': () async {
+          var request = await httpClient.getUrl(Uri.parse(url));
+          request.headers.set("Authorization", "Bearer $token");
+          var response = await request.close();
+          print('Status code: ${response.statusCode}');
+        }
+      },
+      {
+        'name': 'http',
+        'method': () async {
+          var response = await http
+              .get(Uri.parse(url), headers: {"Authorization": "Bearer $token"});
+          print('Status code: ${response.statusCode}');
+        }
+      },
+      {
+        'name': 'Dio',
+        'method': () async {
+          var response = await dio.get(url,
+              options: Options(headers: {"Authorization": "Bearer $token"}));
+          print('Status code: ${response.statusCode}');
+        }
+      },
+      {
+        'name': 'Uno',
+        'method': () async {
+          var response = await uno.get(url,
+              headers: {"Authorization": "Bearer $token"});
+          print('Status code: ${response.status}');
+        }
+      },
+    ];
 
-      var url =
-          'https://prd.drops.online/s/Drops/dw/shop/v23_1/product_search?expand=prices%2Cavailability%2Cimages&count=10&start=0&refine_1=cgid%3DB10076&refine_2=price%3D%280.01..1000000%29&locale=en-KW&locationId=kwt_009';
-      var stopwatch2 = Stopwatch()..start();
+    for (var method in methods) {
+      var times = [];
+      for (var i = 0; i < 10; i++) {
+        stopwatch.start();
+        await method['method']();
+        stopwatch.stop();
+        print('${method['name']} - ${i+1}: ${stopwatch.elapsedMilliseconds}');
+        times.add(stopwatch.elapsedMilliseconds);
+        stopwatch.reset();
+      }
+      print(
+          '${method['name']} average time: ${times.reduce((a, b) => a + b) / times.length}ms');
+    }
 
-      var response = await http.get(
-        Uri.parse(url),
-        headers: {"Authorization": "Bearer $token"},
-      );
+    // /// ========== IOClient
+    // IOClient client = IOClient();
+    // var stopwatch = Stopwatch()..start();
+    // final http.Response resp = await client.get(
+    //   Uri.parse(url),
+    //   headers: {"Authorization": token},
+    // );
+    // stopwatch.stop();
+    // print('IOClient took ${stopwatch.elapsedMilliseconds}ms');
+    // /// ==========
 
-      stopwatch2.stop();
+    // /// ========== HTTP Client
+    // var httpClient = HttpClient();
+    // stopwatch.reset();
+    // stopwatch.start();
+    // var s = await client.get(Uri.parse(url));
+    // stopwatch.stop();
+    // // print(s.body);
+    // print('Http Client took ${stopwatch.elapsedMilliseconds}ms');
+    // /// ==========
 
-      print('Request 2 took ${stopwatch2.elapsedMilliseconds}ms');
+    // /// ========== HTTP
+    // stopwatch.reset();
+    // stopwatch.start();
+    // await http.get(
+    //   Uri.parse(url),
+    //   headers: {"Authorization": "Bearer $token"},
+    // );
+    // stopwatch.stop();
+    // print('Http took ${stopwatch.elapsedMilliseconds}ms');
+    // /// ==========
 
-
-
+    // /// ========== DIO
+    // final dio = Dio();
+    // ///
+    // stopwatch.reset();
+    // stopwatch.start();
+    // final response = await dio.get(url, options: Options(headers: {"Authorization": "Bearer $token"}));
+    // stopwatch.stop();
+    // // print(response.data);
+    // print('Dio took ${stopwatch.elapsedMilliseconds}ms');
+    // /// ==========
   }
 
   @override
